@@ -305,8 +305,12 @@ void QtQQ_Server::on_addBtn_clicked()
     //m_pixPath.replace("/", "\\\\");
 
     //≤Â»Î
+    const QString code = QString("123");
     sql = QString("INSERT INTO tab_employees(departmentID,employeeID,employee_name,picture)\VALUES(%1,%2,'%3','%4')")
                    .arg(depID).arg(employeeID).arg(strName).arg(m_pixPath);
+    DBconn::getInstance()->myQuery(sql.toStdString());
+    sql = QString("INSERT INTO tab_accounts(employeeID,account,code)\VALUES(%1,'%2','%3')")
+        .arg(employeeID).arg(strName).arg(code);
     DBconn::getInstance()->myQuery(sql.toStdString());
 
     QMessageBox::information(this, QString::fromLocal8Bit("Ã· æ"),
